@@ -6,6 +6,5 @@
 - react
 - TypeScript
 - tailwindcss
-
 - We made Home Page
 - We made Navbar 
