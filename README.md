@@ -15,6 +15,8 @@
 - Pricing Section
 - Projects Section
 - - Navbar
+- - - Project Title
+- - - Screen Selection
 - - - Save
 - - - Preview
 - - - Download
