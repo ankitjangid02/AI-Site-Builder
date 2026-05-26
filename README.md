@@ -15,5 +15,9 @@
 - Pricing Section
 - Projects Section
 - - Navbar
+- - - Save
+- - - Preview
+- - - Download
+- - - Publish/Unpublish
 - - Prompt Sidebar  
 - - Project Preview  
