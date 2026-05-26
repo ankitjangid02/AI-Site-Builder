@@ -6,9 +6,9 @@
 - react
 - TypeScript
 - tailwindcss
-- We made Home Page Section
-- We made Navbar Section
-- We made My Projects Section
-- We made Community Section
-- We made Pricing Section
-- We made Projects Section
+- Home Page Section
+- Navbar Section
+- My Projects Section
+- Community Section
+- Pricing Section
+- Projects Section
