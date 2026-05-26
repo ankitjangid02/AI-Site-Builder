@@ -14,3 +14,6 @@
 - Community Section
 - Pricing Section
 - Projects Section
+- - Navbar
+- - Prompt Sidebar  
+- - Project Preview  
