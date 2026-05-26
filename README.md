@@ -20,4 +20,6 @@
 - - - Download
 - - - Publish/Unpublish
 - - Prompt Sidebar  
-- - Project Preview  
+- - - Prompt
+- - - Input area
+- - Project Preview
