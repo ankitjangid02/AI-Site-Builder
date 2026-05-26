@@ -1,11 +1,13 @@
 # Client
 
-## we have done 
+## we have installed 
 - npm create vite@latest
 - vite
 - react
 - TypeScript
 - tailwindcss
+
+## we made
 - Home Page Section
 - Navbar Section
 - My Projects Section
