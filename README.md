@@ -27,3 +27,12 @@
 - - Project Preview
 
 - sign in page 
+
+
+# Server
+- prisma
+- created database in neon
+- use build-auth for authentication
+- middlewares
+- controllers
+- routes
