@@ -36,3 +36,4 @@
 - middlewares
 - controllers
 - routes
+- types
