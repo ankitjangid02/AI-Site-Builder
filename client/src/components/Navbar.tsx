@@ -10,7 +10,7 @@ const Navbar = () => {
   const navigate = useNavigate()
 
   const {data: session} = authClient.useSession()
-
+  
   return (
     <>
       <nav className="z-50 flex items-center justify-between w-full py-4 px-4 md:px-16 lg:px-24 xl:px-32 backdrop-blur border-b text-white border-slate-800">
@@ -58,7 +58,7 @@ const Navbar = () => {
         )}
 
         {/* BACKGROUND IMAGE */}
-          <img src="https://raw.githubusercontent.com/prebuiltui/prebuiltui/refs/heads/main/assets/hero/bg-gradient-2.png" className="absolute inset-0 -z-10 size-full opacity" alt="" />
+          <img src="https://raw.githubusercontent.com/prebuiltui/prebuiltui/refs/heads/main/assets/hero/bg-gradient-2.png" className="absolute inset-0 -z-10 size-full opacity-70" alt="" />
 
     </>
   )
