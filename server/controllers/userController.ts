@@ -70,7 +70,7 @@ export const createUserProject = async (req: Request, res:Response) => {
 
         // enhance user prompt
         const promptEnhanceResponse = await openai.chat.completions.create({
-            model: 'nvidia/nemotron-3-super-120b-a12b:free',
+            model: 'openai/gpt-oss-120b:free',
             messages: [
                 {
                     role: 'system',
@@ -115,7 +115,7 @@ export const createUserProject = async (req: Request, res:Response) => {
 
         // Generate website code
         const codeGenerationResponse = await openai.chat.completions.create({
-            model:'nvidia/nemotron-3-super-120b-a12b:free',
+            model:'openai/gpt-oss-120b:free',
             messages: [
                 {
                     role: 'system',
@@ -215,8 +215,8 @@ export const getUserProject = async (req: Request, res:Response) => {
 
         const {projectId}=req.params;
 
-        const project = await prisma.websiteProject.findUnique({
-            where: {id: projectId as any, userId},
+        const project = await prisma.websiteProject.findFirst({
+            where: {id: projectId as string, userId},
             include:{
                 conversation:{
                     orderBy: { timestamp:'asc'}
@@ -262,8 +262,8 @@ export const togglePublish = async (req: Request, res:Response) => {
 
         const {projectId} = req.params;
 
-        const project = await prisma.websiteProject.findUnique({
-            where: {id: projectId as any, userId}
+        const project = await prisma.websiteProject.findFirst({
+            where: {id: projectId as string, userId},
         })
 
         if(!project){
@@ -283,6 +283,64 @@ export const togglePublish = async (req: Request, res:Response) => {
     }
 }
 
+
+// export const deleteProject = async (req: Request, res: Response) => {
+//   try {
+//     const userId = req.userId
+
+//     if (!userId) {
+//       return res.status(401).json({
+//         message: "Unauthorized",
+//       })
+//     }
+
+//     const { projectId } = req.params
+
+//     const project = await prisma.websiteProject.findFirst({
+//       where: {
+//         id: projectId as string,
+//         userId,
+//       },
+//     })
+
+//     if (!project) {
+//       return res.status(404).json({
+//         message: "Project not found",
+//       })
+//     }
+
+//     // delete child records first
+//     await prisma.conversation.deleteMany({
+//       where: {
+//         projectId: project.id,
+//       },
+//     })
+
+//     await prisma.version.deleteMany({
+//       where: {
+//         projectId: project.id,
+//       },
+//     })
+
+//     // delete project
+//     await prisma.websiteProject.delete({
+//       where: {
+//         id: project.id,
+//       },
+//     })
+
+//     res.json({
+//       message: "Project deleted successfully",
+//     })
+
+//   } catch (error: any) {
+//     console.log(error.code || error.message)
+
+//     res.status(500).json({
+//       message: error.message,
+//     })
+//   }
+// }
 
 // controller function to purchase credits
 export const purchaseCredits = async (req: Request, res:Response) => {

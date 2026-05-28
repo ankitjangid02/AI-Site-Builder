@@ -50,7 +50,7 @@ export const makeRevision = async (req: Request, res:Response) => {
 
         // enhance user prompt
         const promptEnhanceResponse = await openai.chat.completions.create({
-            model:'nvidia/nemotron-3-super-120b-a12b:free',
+            model:'openai/gpt-oss-120b:free',
             messages: [
                 {
                     role: 'system',
@@ -93,7 +93,7 @@ export const makeRevision = async (req: Request, res:Response) => {
 
         // generate website code
         const codeGenerationResponse = await openai.chat.completions.create({
-            model:'nvidia/nemotron-3-super-120b-a12b:free',
+            model:'openai/gpt-oss-120b:free',
             messages:[
                 {
                     role: 'system',
@@ -268,7 +268,7 @@ export const getProjectPreview = async (req: Request, res:Response) => {
 
 
 // get published projects
-export const getPublished = async (req: Request, res:Response) => {
+export const getPublisheProjects = async (req: Request, res:Response) => {
     try {
 
         const project =await prisma.websiteProject.findMany({
