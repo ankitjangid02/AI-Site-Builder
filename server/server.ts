@@ -5,6 +5,7 @@ import { toNodeHandler } from "better-auth/node";
 import { auth } from "./lib/auth.js";
 import userRouter from "./routes/userRoutes.js";
 import projectRouter from "./routes/projectRoutes.js";
+import { stripeWebhook } from "./controllers/stripeWebook.js";
 
 const app = express();
 
@@ -17,6 +18,7 @@ const corsOptions = {
 
 // Middleware
 app.use(cors(corsOptions))
+app.post('/api/stripe', express.raw({type: 'application/json'}), stripeWebhook)
 app.use(express.json());
 
 app.all('/api/auth/{*any}', toNodeHandler(auth));

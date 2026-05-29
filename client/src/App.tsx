@@ -11,6 +11,7 @@ import Navbar from './components/Navbar'
 import { Toaster } from 'sonner'
 import AuthPage from './pages/auth/AuthPage'
 import Settings from './pages/Settings'
+import Loading from './pages/Loading'
 
 
 const App = () => {
@@ -34,6 +35,7 @@ const App = () => {
         <Route path='/view/:projectId' element={<View />} />
         <Route path='/auth/:pathname' element={<AuthPage />} />
         <Route path='/account/settings' element={<Settings />} />
+        <Route path='/loading' element={<Loading />} />
       </Routes>
     </div>
   )
