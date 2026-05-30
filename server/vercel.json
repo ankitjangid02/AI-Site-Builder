@@ -11,6 +11,11 @@
       }
     }
   ],
+  "functions": {
+    "server.ts": {
+      "maxDuration": 60
+    }
+  },
   "routes": [
     {
       "src": "/api/stripe",

@@ -50,7 +50,7 @@ export const makeRevision = async (req: Request, res:Response) => {
 
         // enhance user prompt
         const promptEnhanceResponse = await openai.chat.completions.create({
-            model: 'meta-llama/llama-3.1-8b-instruct:free',
+            model: 'openrouter/free',
             max_tokens: 2048,
             messages: [
                 {
@@ -94,7 +94,7 @@ export const makeRevision = async (req: Request, res:Response) => {
 
         // generate website code
         const codeGenerationResponse = await openai.chat.completions.create({
-            model: 'qwen/qwen-2.5-coder-32b-instruct:free',
+            model: 'openrouter/free',
             max_tokens: 8192,
             messages:[
                 {

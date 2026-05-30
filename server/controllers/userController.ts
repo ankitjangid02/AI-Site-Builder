@@ -67,11 +67,9 @@ export const createUserProject = async (req: Request, res: Response) => {
             data: { credits: { decrement: 5 } }
         })
 
-        res.json({ projectId: project.id })
-
         // enhance user prompt
         const promptEnhanceResponse = await openai.chat.completions.create({
-            model: 'meta-llama/llama-3.1-8b-instruct:free',
+            model: 'openrouter/free',
             max_tokens: 2048,
             messages: [
                 {
@@ -117,7 +115,7 @@ export const createUserProject = async (req: Request, res: Response) => {
 
         // Generate website code
         const codeGenerationResponse = await openai.chat.completions.create({
-            model: 'qwen/qwen-2.5-coder-32b-instruct:free',
+            model: 'openrouter/free',
             max_tokens: 8192,
             messages: [
                 {
@@ -198,13 +196,17 @@ export const createUserProject = async (req: Request, res: Response) => {
             }
         })
 
+        res.json({ projectId: project.id })
+
     } catch (error: any) {
         await prisma.user.update({
             where: { id: userId },
             data: { credits: { increment: 5 } }
         })
         console.log(error);
-        res.status(500).json({ message: error.message });
+        if (!res.headersSent) {
+            res.status(500).json({ message: error.message });
+        }
     }
 }
 
