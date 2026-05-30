@@ -71,7 +71,7 @@ export const createUserProject = async (req: Request, res: Response) => {
 
         // enhance user prompt
         const promptEnhanceResponse = await openai.chat.completions.create({
-            model: 'openai/gpt-oss-120b:free',
+            model: 'meta-llama/llama-3.1-8b-instruct:free',
             max_tokens: 2048,
             messages: [
                 {
@@ -117,7 +117,7 @@ export const createUserProject = async (req: Request, res: Response) => {
 
         // Generate website code
         const codeGenerationResponse = await openai.chat.completions.create({
-            model: 'openai/gpt-oss-120b:free',
+            model: 'qwen/qwen-2.5-coder-32b-instruct:free',
             max_tokens: 8192,
             messages: [
                 {
