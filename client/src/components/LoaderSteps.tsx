@@ -35,7 +35,7 @@ const LoaderSteps = () => {
       {/* Step label - fade using transition only (no invisible start) */}
       <p className="mt-8 text-lg font-light text-white/90 tracking-wide transition-all duration-700 ease-in-out opacity-100" key={current}>{steps[current].label}</p>
       
-      <p className="text-xs text-gray-400 mt-2 transition-opacity duration-700 opacity-100">This may yake around 2-3 minutes...</p>
+      <p className="text-xs text-gray-400 mt-2 transition-opacity duration-700 opacity-100">This may take around 4-5 minutes...</p>
     </div>
   )
 }

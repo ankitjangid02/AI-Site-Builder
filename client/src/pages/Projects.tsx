@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import type { Project } from '../types'
 import { ArrowBigDownDashIcon, EyeIcon, EyeOffIcon, FullscreenIcon, LaptopIcon, Loader2Icon, MessageSquareIcon, SaveIcon, SmartphoneIcon, TableIcon, XIcon } from 'lucide-react'
@@ -29,10 +29,11 @@ const Projects = () => {
       const {data} = await api.get(`/api/user/project/${projectId}`);
       setProject(data.project)
       setIsGenerating(data.project.current_code ? false : true)
-      setLoading(false)
     } catch (error: any) {
       toast.error(error?.response?.data.message || error.message);
       console.log(error);
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -119,7 +120,7 @@ if(!previewRef.current) return;
         <div className='flex items-center gap-2 sm:min-w-90 text-nowrap'>
           <img src="/favicon.svg" alt="logo" className="h-6 cursor-pointer" onClick={()=> navigate('/')} />
           <div>
-            <p className='text-smm text-medium capitalize truncate'>{project.name}</p>
+            <p className='text-sm font-medium capitalize truncate'>{project.name}</p>
             <p className='text-xs text-gray-400 -mt-0.5'>Previewing last saved version</p>
           </div>
           <div className='sm:hidden flex-1 flex justify-end'>

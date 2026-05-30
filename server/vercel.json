@@ -1,0 +1,29 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "server.ts",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": [
+          "generated/prisma/**",
+          "prisma/schema.prisma"
+        ]
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/stripe",
+      "dest": "server.ts"
+    },
+    {
+      "src": "/api/(.*)",
+      "dest": "server.ts"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "server.ts"
+    }
+  ]
+}
