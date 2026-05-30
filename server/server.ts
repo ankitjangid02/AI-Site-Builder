@@ -29,6 +29,17 @@ app.get('/', (req: Request, res: Response) => {
     res.send('Server is Live!');
 });
 
+app.get('/api/debug-env', (req: Request, res: Response) => {
+    res.json({
+        NODE_ENV: process.env.NODE_ENV,
+        BETTER_AUTH_URL: process.env.BETTER_AUTH_URL,
+        TRUSTED_ORIGINS: process.env.TRUSTED_ORIGINS,
+        VERCEL: process.env.VERCEL,
+        HAS_DATABASE_URL: !!process.env.DATABASE_URL,
+        HAS_AI_KEY: !!process.env.AI_API_KEY,
+    });
+});
+
 app.use('/api/user', userRouter);
 app.use('/api/project', projectRouter);
 
