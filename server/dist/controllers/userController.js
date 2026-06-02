@@ -56,9 +56,10 @@ export const createUserProject = async (req, res) => {
             where: { id: userId },
             data: { credits: { decrement: 5 } }
         });
+        res.json({ projectId: project.id });
         // enhance user prompt
         const promptEnhanceResponse = await openai.chat.completions.create({
-            model: 'openrouter/free',
+            model: 'google/gemini-2.5-flash',
             max_tokens: 2048,
             messages: [
                 {
@@ -99,7 +100,7 @@ export const createUserProject = async (req, res) => {
         });
         // Generate website code
         const codeGenerationResponse = await openai.chat.completions.create({
-            model: 'openrouter/free',
+            model: 'google/gemini-2.5-flash',
             max_tokens: 8192,
             messages: [
                 {
@@ -174,7 +175,6 @@ export const createUserProject = async (req, res) => {
                 current_version_index: version.id
             }
         });
-        res.json({ projectId: project.id });
     }
     catch (error) {
         await prisma.user.update({
@@ -182,9 +182,7 @@ export const createUserProject = async (req, res) => {
             data: { credits: { increment: 5 } }
         });
         console.log(error);
-        if (!res.headersSent) {
-            res.status(500).json({ message: error.message });
-        }
+        res.status(500).json({ message: error.message });
     }
 };
 // controller function to get  a single user project

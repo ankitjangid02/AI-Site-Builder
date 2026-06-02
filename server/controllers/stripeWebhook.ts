@@ -1,4 +1,3 @@
-import { string } from "better-auth";
 import { Request, Response } from "express";
 import Stripe from "stripe";
 import prisma from "../lib/prisma.js";

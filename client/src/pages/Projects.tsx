@@ -124,8 +124,8 @@ if(!previewRef.current) return;
             <p className='text-xs text-gray-400 -mt-0.5'>Previewing last saved version</p>
           </div>
           <div className='sm:hidden flex-1 flex justify-end'>
-            {isMenuOpen ? <MessageSquareIcon onClick={()=> setIsMenuOpen(false)} className="size-6 cursor-pointer" />
-            : <XIcon onClick={()=> setIsMenuOpen(true)} className="size-6 cursor-pointer" />}
+            {isMenuOpen ? <XIcon onClick={()=> setIsMenuOpen(false)} className="size-6 cursor-pointer" />
+            : <MessageSquareIcon onClick={()=> setIsMenuOpen(true)} className="size-6 cursor-pointer" />}
           </div>
         </div>
 

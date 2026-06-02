@@ -278,7 +278,7 @@ export const togglePublish = async (req: Request, res: Response) => {
             data: { isPublished: !project.isPublished }
         })
 
-        res.json({ message: project.isPublished ? 'Project Unpublished' : 'Project Published Succeessfully' })
+        res.json({ message: project.isPublished ? 'Project Unpublished' : 'Project Published Successfully' })
 
     } catch (error: any) {
         console.log(error.code || error.message);

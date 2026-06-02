@@ -19,7 +19,7 @@ const Home = () => {
       if (!session?.user) {
         return toast.error('Please sign in to create a project')
       }else if(!input.trim()){
-        return toast.error('Please a message')
+        return toast.error('Please enter a message')
       }
       setLoading(true);
       const {data} = await api.post('/api/user/project', {initial_prompt: input});

@@ -38,7 +38,7 @@ export const makeRevision = async (req, res) => {
         });
         // enhance user prompt
         const promptEnhanceResponse = await openai.chat.completions.create({
-            model: 'openrouter/free',
+            model: 'google/gemini-2.5-flash',
             max_tokens: 2048,
             messages: [
                 {
@@ -78,7 +78,7 @@ export const makeRevision = async (req, res) => {
         });
         // generate website code
         const codeGenerationResponse = await openai.chat.completions.create({
-            model: 'openrouter/free',
+            model: 'google/gemini-2.5-flash',
             max_tokens: 8192,
             messages: [
                 {
