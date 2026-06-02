@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import prisma from "../lib/prisma.js";
-import openai from "../configs/openai.js";
+import openai, { getCompletion } from "../configs/openai.js";
 
 // controller function to make revision
 export const makeRevision = async (req: Request, res:Response) => {
@@ -49,8 +49,7 @@ export const makeRevision = async (req: Request, res:Response) => {
         })
 
         // enhance user prompt
-        const promptEnhanceResponse = await openai.chat.completions.create({
-            model:'z-ai/glm-4.5-air:free',
+        const promptEnhanceResponse = await getCompletion({
             max_tokens: 2048,
             messages: [
                 {
@@ -93,8 +92,7 @@ export const makeRevision = async (req: Request, res:Response) => {
         })
 
         // generate website code
-        const codeGenerationResponse = await openai.chat.completions.create({
-            model:'z-ai/glm-4.5-air:free',
+        const codeGenerationResponse = await getCompletion({
             max_tokens: 8192,
             messages:[
                 {

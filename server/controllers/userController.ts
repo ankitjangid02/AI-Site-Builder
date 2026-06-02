@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import prisma from "../lib/prisma.js";
-import openai from "../configs/openai.js";
+import openai, { getCompletion } from "../configs/openai.js";
 import Stripe from "stripe";
 
 
@@ -73,8 +73,7 @@ export const createUserProject = async (req: Request, res: Response) => {
         (async () => {
             try {
                 // enhance user prompt
-                const promptEnhanceResponse = await openai.chat.completions.create({
-                    model: 'z-ai/glm-4.5-air:free',
+                const promptEnhanceResponse = await getCompletion({
                     max_tokens: 2048,
                     messages: [
                         {
@@ -118,8 +117,7 @@ export const createUserProject = async (req: Request, res: Response) => {
                 });
 
                 // Generate website code
-                const codeGenerationResponse = await openai.chat.completions.create({
-                    model: 'z-ai/glm-4.5-air:free',
+                const codeGenerationResponse = await getCompletion({
                     max_tokens: 8192,
                     messages: [
                         {
