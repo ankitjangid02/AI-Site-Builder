@@ -166,9 +166,9 @@ VITE_BASEURL="http://localhost:3000"
 2. The frontend triggers `POST /api/user/project` (protected endpoint).
 3. The server checks user credits; if `< 5`, throws an error.
 4. The server creates a `WebsiteProject` database row and deducts `5 credits`.
-5. An async request enhances the prompt using Gemini:
+5. An async request enhances the prompt in a safe background context using `z-ai/glm-4.5-air:free`:
    - **System Prompt**: Focuses on modern layouts, animations, design styles, and details.
-6. The enhanced prompt is sent to `google/gemini-2.5-flash` to write the code:
+6. The enhanced prompt is sent to `z-ai/glm-4.5-air:free` (a high-performance, 100% free model) to write the code:
    - **System Prompt**: Strictly enforce returning only valid standalone HTML code incorporating Tailwind CSS v4 CDN script and customized Javascript.
 7. The code is filtered of code fences (e.g. `\`\`\`html`), a `Version` row is created, and the project is updated.
 8. While generating, the client polls the server (`setInterval` every 10 seconds) until `current_code` is returned.
@@ -177,7 +177,7 @@ VITE_BASEURL="http://localhost:3000"
 1. Inside the workspace sidebar (`Sidebar.tsx`), the user writes a message detailing what changes they want.
 2. Frontend triggers `POST /api/project/revision/:projectId` (costs `5 credits`).
 3. The server enhances the prompt based on the user's intent.
-4. The server feeds the previous website code and the enhanced prompt to Gemini to perform the edits.
+4. The server feeds the previous website code and the enhanced prompt to `z-ai/glm-4.5-air:free` to perform the edits.
 5. The updated HTML is saved as a new version index and pushed back to the client viewport.
 
 ### Stripe Integration Flow
@@ -205,3 +205,10 @@ To deliver a production-ready application, we corrected several bugs and improve
    - Fixed mobile menu icon behaviors in `Projects.tsx` where mobile chat toggling was inverted (now displays `XIcon` when open and `MessageSquareIcon` when closed).
 4. **Git Versioning Setup**:
    - Fixed `.gitinore` file name typo to `.gitignore` at the project root to ensure files like `node_modules`, `.env`, and build outputs are correctly excluded from Git tracking.
+5. **AI Model Optimization & Credit Depletion Prevention**:
+   - Replaced paid `google/gemini-2.5-flash` model with `z-ai/glm-4.5-air:free` which is a 100% free model on OpenRouter. This resolves the payment blocks (`402 Payment Required`) that occurred because the user's API Key had run out of paid credits.
+6. **Express Background Task Error Safety**:
+   - Refactored `createUserProject` to run the AI generation inside a safe, isolated asynchronous try-catch IIFE block. This prevents unhandled exceptions from calling `res.status(500).json` after `res.json` has already sent headers (which was previously crashing the entire Express server process).
+7. **Client HTTP Request Hang Fix**:
+   - Resolved a bug in the `makeRevision` project revision endpoint where a failed code generation returned immediately from the function without sending any HTTP response back to the client. It now correctly returns `res.status(500).json(...)`, preventing the client browser from hanging indefinitely.
+
