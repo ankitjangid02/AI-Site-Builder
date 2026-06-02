@@ -50,7 +50,7 @@ export const makeRevision = async (req: Request, res:Response) => {
 
         // enhance user prompt
         const promptEnhanceResponse = await openai.chat.completions.create({
-            model:'google/gemini-2.5-flash',
+            model:'z-ai/glm-4.5-air:free',
             max_tokens: 2048,
             messages: [
                 {
@@ -94,7 +94,7 @@ export const makeRevision = async (req: Request, res:Response) => {
 
         // generate website code
         const codeGenerationResponse = await openai.chat.completions.create({
-            model:'google/gemini-2.5-flash',
+            model:'z-ai/glm-4.5-air:free',
             max_tokens: 8192,
             messages:[
                 {
@@ -126,17 +126,17 @@ export const makeRevision = async (req: Request, res:Response) => {
 
         if(!code){
             await prisma.conversation.create({
-            data: {
-                role:'assistant',
-                content:"Unable to generate the code, please try again",
-                projectId
-            }
-        })
-        await prisma.user.update({
-            where: {id: userId},
-            data: {credits: {increment: 5}}
-        })
-        return;
+                data: {
+                    role:'assistant',
+                    content:"Unable to generate the code, please try again",
+                    projectId
+                }
+            })
+            await prisma.user.update({
+                where: {id: userId},
+                data: {credits: {increment: 5}}
+            })
+            return res.status(500).json({ message: "Unable to generate the code, please try again" });
         }
 
         const version = await prisma.version.create({
