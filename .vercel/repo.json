@@ -1,0 +1,17 @@
+{
+  "remoteName": "origin",
+  "projects": [
+    {
+      "id": "prj_I8ZVZ98UAyINQwlQxqRGhwGEAHQw",
+      "name": "ai-site-builder-aj",
+      "directory": "server",
+      "orgId": "team_Y7RxDDse0f4c4n881np3k4fa"
+    },
+    {
+      "id": "prj_x8ep3PtfFPHwpdJAqjmfYqnH6IvZ",
+      "name": "ai-site-builder-frontend-aj",
+      "directory": "client",
+      "orgId": "team_Y7RxDDse0f4c4n881np3k4fa"
+    }
+  ]
+}
