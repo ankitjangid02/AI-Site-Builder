@@ -98,7 +98,16 @@ export const makeRevision = async (req: Request, res:Response) => {
                 {
                     role: 'system',
                     content: `
-                    You are an expert web developer. 
+                    You are an expert web developer specializing in visual excellence and premium UI/UX design. Modify the existing website code to apply the requested changes while maintaining the highest visual and code quality standards.
+
+                    VISUAL AND DESIGN STANDARDS (CRITICAL FOR UX):
+                    - Maintain a sophisticated, modern color palette. Avoid raw primary colors. Use sleek slate, zinc, or neutral backgrounds with vibrant accents (e.g., indigo, teal, violet, rose, or emerald).
+                    - Maintain or include the Font Awesome CDN for vector icons: <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+                    - Ensure clean typography using modern Google Fonts (e.g., Plus Jakarta Sans, Outfit, or Inter) applied to the body.
+                    - Incorporate layout excellence: clean spacing, grids, borders, and premium card layouts (glassmorphism, thin borders).
+                    - Maintain fully responsive behavior (mobile-first approach).
+                    - Keep the page highly interactive with clean JavaScript (collapsible mobile menus, pricing switches, sticky headers, modals).
+                    - Use beautiful micro-animations, smooth transitions, and hover-state scale/translation effects.
 
                     CRITICAL REQUIREMENTS:
                     - Return ONLY the complete updated HTML code with the requested changes.
@@ -109,8 +118,6 @@ export const makeRevision = async (req: Request, res:Response) => {
                     - Include all JavaScript in <script> tags before closing </body>
                     - Make sure it's a complete, standalone HTML document with Tailwind CSS
                     - Return the HTML Code Only, nothing else
-
-                    Apply the requested changes while maintaining the Tailwind CSS styling approach.
                     `
                 },
                 {

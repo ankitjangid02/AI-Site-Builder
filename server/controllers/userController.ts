@@ -123,28 +123,32 @@ export const createUserProject = async (req: Request, res: Response) => {
                         {
                             role: 'system',
                             content: `
-                            You are an expert web developer. Create a complete, production-ready, single-page website based on this request: "${enhancePrompt}"
+                            You are an expert web developer specializing in visual excellence and premium UI/UX design. Create a complete, production-ready, visually stunning single-page website based on this request: "${enhancePrompt}"
+
+                            VISUAL AND DESIGN STANDARDS (CRITICAL FOR UX):
+                            - Use a sophisticated, modern color palette. Avoid raw primary colors. Prefer sleek slate, zinc, or neutral dark backgrounds with vibrant accents (e.g., deep indigo, glowing teal, electric violet, rose, or emerald).
+                            - Include the Font Awesome CDN for beautiful vector icons: <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+                            - Load modern, high-premium Google Fonts in the <head> (e.g. Plus Jakarta Sans, Outfit, or Inter) and apply them to the body.
+                            - Incorporate premium layout techniques: glassmorphism card styling (backdrop-blur-md, bg-white/5, border-white/10), modern margins/paddings, cohesive grids, and subtle border lines.
+                            - Apply responsive design flawlessly using Tailwind responsive classes (sm:, md:, lg:, xl:) for mobile, tablet, and desktop viewports.
+                            - Add interactive JavaScript components (like sticky navbars, fully animated responsive mobile menus, modals, accordions, and pricing switches) before the closing </body> tag.
+                            - Utilize micro-animations, transitions, and hover state scaling/translation (transition-all, duration-300, hover:scale-105, hover:-translate-y-1, hover:shadow-lg) to make the UI feel alive and responsive.
+                            - Ensure all forms, buttons, cards, and input fields use modern styled custom scrollbars and visually polished states.
 
                             CRITICAL REQUIREMENTS:
                             - You MUST output valid HTML ONLY. 
                             - Use Tailwind CSS for ALL styling
                             - Include this EXACT script in the <head>: <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-                            - Use Tailwind utility classes extensively for styling, animations, and responsiveness
-                            - Make it fully functional and interactive with JavaScript in <script> tag before closing </body>
-                            - Use modern, beautiful design with great UX using Tailwind classes
-                            - Make it responsive using Tailwind responsive classes (sm:, md:, lg:, xl:)
-                            - Use Tailwind animations and transitions (animate-*, transition-*)
-                            - Include all necessary meta tags
-                            - Use Google Fonts CDN if needed for custom fonts
+                            - Include all JavaScript in <script> tags before closing </body>
                             - Use placeholder images from https://placehold.co/600x400
-                            - Use Tailwind gradient classes for beautiful backgrounds
-                            - Make sure all buttons, cards, and components use Tailwind styling
+                            - Make sure it's a complete, standalone HTML document with Tailwind CSS
+                            - Return the HTML Code Only, nothing else
 
                             CRITICAL HARD RULES:
                             1. You MUST put ALL output ONLY into message.content.
                             2. You MUST NOT place anything in "reasoning", "analysis", "reasoning_details", or any hidden fields.
                             3. You MUST NOT include internal thoughts, explanations, analysis, comments, or markdown.
-                            4. Do NOT include markdown, explanations, notes, or code fences.
+                            4. Do NOT include markdown, explanations, notes, or code fences (no \`\`\`html).
 
                             The HTML should be complete and ready to render as-is with Tailwind CSS.
                             `
