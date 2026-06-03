@@ -11,7 +11,13 @@ export async function getCompletion(options: {
   temperature?: number;
 }) {
   const primaryModel = 'google/gemini-2.5-flash';
-  const fallbackModel = 'z-ai/glm-4.5-air:free';
+  const fallbackModels = [
+    'openrouter/free',
+    'google/gemma-4-31b-it:free',
+    'google/gemma-4-26b-a4b-it:free',
+    'z-ai/glm-4.5-air:free'
+  ];
+
   try {
     const response = await openai.chat.completions.create({
       model: primaryModel,
@@ -32,16 +38,18 @@ export async function getCompletion(options: {
       error.message?.toLowerCase().includes('rate limit');
       
     if (isBillingOrRateError) {
-      console.log(`[AI Config] Issue detected. Falling back to free model (${fallbackModel})...`);
-      try {
-        const fallbackResponse = await openai.chat.completions.create({
-          model: fallbackModel,
-          ...options,
-        });
-        return fallbackResponse;
-      } catch (fallbackError: any) {
-        console.error(`[AI Config] Fallback model (${fallbackModel}) also failed:`, fallbackError.message || fallbackError);
-        throw fallbackError;
+      for (const fallbackModel of fallbackModels) {
+        console.log(`[AI Config] Issue detected. Trying fallback model (${fallbackModel})...`);
+        try {
+          const fallbackResponse = await openai.chat.completions.create({
+            model: fallbackModel,
+            ...options,
+          });
+          console.log(`[AI Config] Fallback model (${fallbackModel}) succeeded!`);
+          return fallbackResponse;
+        } catch (fallbackError: any) {
+          console.error(`[AI Config] Fallback model (${fallbackModel}) failed:`, fallbackError.message || fallbackError);
+        }
       }
     }
     throw error;

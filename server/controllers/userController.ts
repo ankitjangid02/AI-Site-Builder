@@ -70,7 +70,7 @@ export const createUserProject = async (req: Request, res: Response) => {
         res.json({ projectId: project.id });
 
         // Run the AI generation in the background safely
-        (async () => {
+        const generateTask = async () => {
             try {
                 // enhance user prompt
                 const promptEnhanceResponse = await getCompletion({
@@ -211,7 +211,15 @@ export const createUserProject = async (req: Request, res: Response) => {
                     data: { credits: { increment: 5 } }
                 });
             }
-        })();
+        };
+
+        try {
+            const { waitUntil } = await import('@vercel/functions');
+            waitUntil(generateTask());
+        } catch (e) {
+            // Local fallback if running outside of Vercel
+            generateTask();
+        }
     } catch (error: any) {
         console.log(error);
         res.status(500).json({ message: error.message });
