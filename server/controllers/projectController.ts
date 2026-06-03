@@ -109,6 +109,11 @@ export const makeRevision = async (req: Request, res:Response) => {
                     - Keep the page highly interactive with clean JavaScript (collapsible mobile menus, pricing switches, sticky headers, modals).
                     - Use beautiful micro-animations, smooth transitions, and hover-state scale/translation effects.
 
+                    CONTENT AND COPYWRITING STANDARDS (CRITICAL FOR QUALITY):
+                    - Keep all text content complete, realistic, and tailored specifically to the website's theme or business objectives.
+                    - Banish the use of "Lorem Ipsum", "text here", or any generic placeholders. Ensure that every single headline, feature title, pricing item, customer feedback quotation, and description card has meaningful, rich, and contextually logical copy.
+                    - Ensure all key sections are fully written: navigation, hero with strong call-to-actions, features grid, realistic testimonials with customer avatars/names/titles, pricing grid with clear feature details, working contact form elements, and detailed footer navigation links.
+
                     CRITICAL REQUIREMENTS:
                     - Return ONLY the complete updated HTML code with the requested changes.
                     - Do NOT include markdown formatting or code fences (e.g. do NOT wrap the code in \`\`\`html).

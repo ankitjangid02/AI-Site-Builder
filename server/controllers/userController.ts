@@ -135,6 +135,11 @@ export const createUserProject = async (req: Request, res: Response) => {
                             - Utilize micro-animations, transitions, and hover state scaling/translation (transition-all, duration-300, hover:scale-105, hover:-translate-y-1, hover:shadow-lg) to make the UI feel alive and responsive.
                             - Ensure all forms, buttons, cards, and input fields use modern styled custom scrollbars and visually polished states.
 
+                            CONTENT AND COPYWRITING STANDARDS (CRITICAL FOR QUALITY):
+                            - Write complete, highly compelling, and topic-specific copy.
+                            - NEVER use "Lorem Ipsum", "lorem ipsum dolor...", "text here", or other placeholders. Every paragraph, heading, list item, and detail card must have realistic, high-quality, customized text tailored to the user's specific request.
+                            - Ensure the landing page has all standard production-grade sections fully populated with copy: Navigation/Header, a conversion-focused Hero section (with bold heading, sub-headline, and CTA buttons), Features/Benefits grid, User Testimonials (with realistic customer names, titles, and positive review texts), Pricing Tiers (detailing features and actual dollar prices), Contact Form, and a comprehensive Footer.
+
                             CRITICAL REQUIREMENTS:
                             - You MUST output valid HTML ONLY. 
                             - Use Tailwind CSS for ALL styling
