@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import prisma from "../lib/prisma.js";
 import openai, { getCompletion } from "../configs/openai.js";
 import Stripe from "stripe";
+import { extractHtml } from "../lib/htmlParser.js";
 
 
 // get user credits
@@ -160,21 +161,14 @@ export const createUserProject = async (req: Request, res: Response) => {
                             - NEVER use "Lorem Ipsum", "lorem ipsum dolor...", "text here", or other placeholders.
 
                             CRITICAL REQUIREMENTS:
-                            - You MUST output valid HTML ONLY. 
-                            - Use Tailwind CSS for ALL styling
-                            - Include this EXACT script in the <head>: <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+                            - You MUST output valid HTML.
+                            - Use Tailwind CSS for ALL styling.
+                            - Include this EXACT script in the <head>: <script src="https://cdn.tailwindcss.com"></script>
+                            - To avoid token limit truncation, write clean, highly optimized, non-repetitive HTML.
                             - Include all JavaScript in <script> tags before closing </body>
                             - Use placeholder images from https://placehold.co/600x400
                             - Make sure it's a complete, standalone HTML document with Tailwind CSS
-                            - Return the HTML Code Only, nothing else
-
-                            CRITICAL HARD RULES:
-                            1. You MUST put ALL output ONLY into message.content.
-                            2. You MUST NOT place anything in "reasoning", "analysis", "reasoning_details", or any hidden fields.
-                            3. You MUST NOT include internal thoughts, explanations, analysis, comments, or markdown.
-                            4. Do NOT include markdown, explanations, notes, or code fences (no \`\`\`html).
-
-                            The HTML should be complete and ready to render as-is with Tailwind CSS.
+                            - Return the HTML document wrapped inside a single standard markdown code block: \`\`\`html [HTML code here] \`\`\`. Do not write any explanations, intro text, or outro text.
                             `
                         },
                         {
@@ -201,10 +195,12 @@ export const createUserProject = async (req: Request, res: Response) => {
                     return;
                 }
 
+                const cleanedHtml = extractHtml(code);
+
                 // create version for the project
                 const version = await prisma.version.create({
                     data: {
-                        code: code.replace(/```[a-z]*\n?/gi, '').replace(/```$/g, '').trim(),
+                        code: cleanedHtml,
                         description: 'Initial version',
                         projectId: project.id
                     }
@@ -221,7 +217,7 @@ export const createUserProject = async (req: Request, res: Response) => {
                 await prisma.websiteProject.update({
                     where: { id: project.id },
                     data: {
-                        current_code: code.replace(/```[a-z]*\n?/gi, '').replace(/```$/g, '').trim(),
+                        current_code: cleanedHtml,
                         current_version_index: version.id
                     }
                 });

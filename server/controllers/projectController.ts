@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import prisma from "../lib/prisma.js";
 import openai, { getCompletion } from "../configs/openai.js";
+import { extractHtml } from "../lib/htmlParser.js";
 
 // controller function to make revision
 export const makeRevision = async (req: Request, res:Response) => {
@@ -135,14 +136,14 @@ export const makeRevision = async (req: Request, res:Response) => {
                     - NEVER use "Lorem Ipsum", "lorem ipsum dolor...", "text here", or other placeholders.
 
                     CRITICAL REQUIREMENTS:
-                    - Return ONLY the complete updated HTML code with the requested changes.
-                    - Do NOT include markdown formatting or code fences (e.g. do NOT wrap the code in \`\`\`html).
+                    - You MUST output valid HTML.
                     - Use Tailwind CSS for ALL styling.
-                    - Include this EXACT script in the <head>: <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-                    - Use Tailwind utility classes for all styling changes.
+                    - Include this EXACT script in the <head>: <script src="https://cdn.tailwindcss.com"></script>
+                    - To avoid token limit truncation, write clean, highly optimized, non-repetitive HTML.
                     - Include all JavaScript in <script> tags before closing </body>
+                    - Use placeholder images from https://placehold.co/600x400
                     - Make sure it's a complete, standalone HTML document with Tailwind CSS
-                    - Return the HTML Code Only, nothing else
+                    - Return the HTML document wrapped inside a single standard markdown code block: \`\`\`html [HTML code here] \`\`\`. Do not write any explanations, intro text, or outro text.
                     `
                 },
                 {
@@ -169,9 +170,11 @@ export const makeRevision = async (req: Request, res:Response) => {
             return res.status(500).json({ message: "Unable to generate the code, please try again" });
         }
 
+        const cleanedHtml = extractHtml(code);
+
         const version = await prisma.version.create({
             data:{
-                code: code.replace(/```[a-z]*\n?/gi,'').replace(/```$/g,'').trim(),
+                code: cleanedHtml,
                 description: 'changes made',
                 projectId
             }
@@ -188,7 +191,7 @@ export const makeRevision = async (req: Request, res:Response) => {
         await prisma.websiteProject.update({
             where: {id: projectId},
             data:{
-                current_code: code.replace(/```[a-z]*\n?/gi,'').replace(/```$/g,'').trim(),
+                current_code: cleanedHtml,
                 current_version_index: version.id
             }
         })
