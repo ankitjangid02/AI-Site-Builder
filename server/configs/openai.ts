@@ -12,9 +12,10 @@ export async function getCompletion(options: {
 }) {
   const primaryModel = 'google/gemini-2.5-flash';
   const fallbackModels = [
+    'qwen/qwen3-coder:free',
+    'meta-llama/llama-3.3-70b-instruct:free',
     'openrouter/free',
     'google/gemma-4-31b-it:free',
-    'google/gemma-4-26b-a4b-it:free',
     'z-ai/glm-4.5-air:free'
   ];
 

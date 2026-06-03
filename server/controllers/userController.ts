@@ -125,20 +125,39 @@ export const createUserProject = async (req: Request, res: Response) => {
                             content: `
                             You are an expert web developer specializing in visual excellence and premium UI/UX design. Create a complete, production-ready, visually stunning single-page website based on this request: "${enhancePrompt}"
 
-                            VISUAL AND DESIGN STANDARDS (CRITICAL FOR UX):
-                            - Use a sophisticated, modern color palette. Avoid raw primary colors. Prefer sleek slate, zinc, or neutral dark backgrounds with vibrant accents (e.g., deep indigo, glowing teal, electric violet, rose, or emerald).
-                            - Include the Font Awesome CDN for beautiful vector icons: <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-                            - Load modern, high-premium Google Fonts in the <head> (e.g. Plus Jakarta Sans, Outfit, or Inter) and apply them to the body.
-                            - Incorporate premium layout techniques: glassmorphism card styling (backdrop-blur-md, bg-white/5, border-white/10), modern margins/paddings, cohesive grids, and subtle border lines.
-                            - Apply responsive design flawlessly using Tailwind responsive classes (sm:, md:, lg:, xl:) for mobile, tablet, and desktop viewports.
-                            - Add interactive JavaScript components (like sticky navbars, fully animated responsive mobile menus, modals, accordions, and pricing switches) before the closing </body> tag.
-                            - Utilize micro-animations, transitions, and hover state scaling/translation (transition-all, duration-300, hover:scale-105, hover:-translate-y-1, hover:shadow-lg) to make the UI feel alive and responsive.
-                            - Ensure all forms, buttons, cards, and input fields use modern styled custom scrollbars and visually polished states.
+                            MASTER UI/UX STRUCTURE BLUEPRINT (MANDATORY PAGE FLOW):
+                            You must structure the generated single-page website with the following sections, styled with premium Tailwind utility classes:
+                            1. NAVIGATION BAR: Sticky, transparent glassmorphism header (e.g., "sticky top-0 z-50 backdrop-blur-md bg-slate-950/80 border-b border-white/10") containing a beautiful text logo, desktop navigation links with active hover states, and a fully functional mobile hamburger menu operated via simple JavaScript.
+                            2. HERO SECTION: A jaw-dropping presentation featuring:
+                               - An eyebrow badge capsule (e.g. "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 mb-6") to draw attention.
+                               - A massive, bold heading with gradient text (e.g., "text-5xl md:text-7xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 leading-none").
+                               - A descriptive subtitle with balanced leading.
+                               - Primary and outlined secondary call-to-action (CTA) buttons with scaling transitions on hover.
+                               - A beautiful mock visual mockup (representing a dashboard screen, card, or interface) featuring rounded corners, subtle shadows, and a thin border.
+                            3. FEATURES GRID: A responsive 3-column container showcasing the product or service features:
+                               - Use modern card components (e.g., "bg-white/5 border border-white/10 p-6 rounded-2xl transition-all duration-300 hover:border-indigo-500/50 hover:shadow-indigo-500/5 hover:-translate-y-1").
+                               - Include highly styled icon bubbles (Font Awesome icons placed inside styled backgrounds).
+                               - Provide detailed headlines and informative copy for every feature.
+                            4. TESTIMONIALS: A section showing trust and social proof:
+                               - Grid of cards containing customer reviews.
+                               - Include Unsplash/Pravatar profile pictures (e.g. <img class="w-10 h-10 rounded-full object-cover" src="https://i.pravatar.cc/100?img=12" alt="...">), customer name, job title, and glowing star rating icons (<i class="fas fa-star text-amber-400"></i>).
+                            5. PRICING OR SERVICES: An interactive section showing 3 tiers/options:
+                               - Highlight the "Popular" tier using a glowing indigo border or colored top badge.
+                               - Detail clear, actual dollar pricing and write a robust checklist of features with styled checkmark icons.
+                            6. CONTACT FORM: A glassmorphism block containing structured input fields with glowing focus rings, proper labels, and an interactive submit button.
+                            7. FOOTER: Multiple columns for links, logo, social icon row (GitHub, Twitter, LinkedIn), and copyright text.
 
-                            CONTENT AND COPYWRITING STANDARDS (CRITICAL FOR QUALITY):
-                            - Write complete, highly compelling, and topic-specific copy.
-                            - NEVER use "Lorem Ipsum", "lorem ipsum dolor...", "text here", or other placeholders. Every paragraph, heading, list item, and detail card must have realistic, high-quality, customized text tailored to the user's specific request.
-                            - Ensure the landing page has all standard production-grade sections fully populated with copy: Navigation/Header, a conversion-focused Hero section (with bold heading, sub-headline, and CTA buttons), Features/Benefits grid, User Testimonials (with realistic customer names, titles, and positive review texts), Pricing Tiers (detailing features and actual dollar prices), Contact Form, and a comprehensive Footer.
+                            VISUAL AND DESIGN STANDARDS (CRITICAL FOR UX):
+                            - Use a sophisticated, modern dark theme palette (Slate-950/Slate-900 background) paired with vibrant gradient accent highlights (indigo, teal, purple, rose).
+                            - Load modern, premium Google Fonts in the <head> (e.g., family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800) and apply to the body.
+                            - Include the Font Awesome CDN for icons in the <head>: <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+                            - Apply responsive design flawlessly at all width breakpoints (sm:, md:, lg:, xl:).
+                            - Add interactive JavaScript components (hamburger menu toggling, pricing switcher) inside script tags at the bottom.
+                            - Utilise micro-animations, transitions, and hover-state scale/translation effects to make the interface feel premium and alive.
+
+                            CONTENT AND COPYWRITING STANDARDS (CRITICAL):
+                            - Write actual, tailored marketing copy for every header, description, checklist item, pricing option, and testimonial text.
+                            - NEVER use "Lorem Ipsum", "lorem ipsum dolor...", "text here", or other placeholders.
 
                             CRITICAL REQUIREMENTS:
                             - You MUST output valid HTML ONLY. 
