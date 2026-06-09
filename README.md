@@ -44,4 +44,4 @@
 - Neon for PostgreSQL
 - OpenRouterAI for API of ai
 - BuildUi for home page
-- BuildAuthUi for login and register page and Setting for account
+- BuildAuthUi for login and register page and Setting from profile
